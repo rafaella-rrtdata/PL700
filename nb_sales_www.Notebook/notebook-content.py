@@ -72,3 +72,18 @@ df_customer.write.format("delta").mode("overwrite").saveAsTable("Bronze_Landing.
 # META   "language": "python",
 # META   "language_group": "synapse_pyspark"
 # META }
+
+# MARKDOWN ********************
+
+# ## Trabajar la tabla mas compleja
+
+
+# CELL ********************
+
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
