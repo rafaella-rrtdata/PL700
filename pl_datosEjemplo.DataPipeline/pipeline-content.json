@@ -1,0 +1,351 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "ParquetSource",
+            "storeSettings": {
+              "type": "AzureBlobStorageReadSettings",
+              "recursive": true,
+              "wildcardFolderPath": "WideWorldImportersDW/parquet/full/dimension_stock_item",
+              "wildcardFileName": "*.parquet"
+            },
+            "formatSettings": {
+              "type": "ParquetReadSettings"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "AzureBlobStorageLocation",
+                  "container": "sampledata"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "dimension_stock_item",
+                "properties": {
+                  "type": "AzureBlobStorage",
+                  "typeProperties": {
+                    "authenticationType": "Anonymous",
+                    "containerUri": "https://fabrictutorialdata.blob.core.windows.net/sampledata"
+                  }
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "ParquetSink",
+            "formatSettings": {
+              "type": "ParquetWriteSettings",
+              "enableVertiParquet": false
+            },
+            "storeSettings": {
+              "type": "LakehouseWriteSettings",
+              "copyBehavior": "PreserveHierarchy"
+            },
+            "datasetSettings": {
+              "type": "Parquet",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": "d_Stock"
+                },
+                "compressionCodec": "snappy"
+              },
+              "schema": [],
+              "connectionSettings": {
+                "name": "Bronze_Landing",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "f0f8ea22-0e9b-8aaa-4ca2-6d028bf74e01",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "externalReferences": {
+                    "connection": "c277e0c3-3a5a-4cb1-998e-e5b08e61e6fc"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "mappings": [
+              {
+                "source": {
+                  "name": "StockItemKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "StockItemKey",
+                  "type": "Int32",
+                  "physicalType": "INT_32"
+                }
+              },
+              {
+                "source": {
+                  "name": "WWIStockItemID",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "WWIStockItemID",
+                  "type": "Int32",
+                  "physicalType": "INT_32"
+                }
+              },
+              {
+                "source": {
+                  "name": "StockItem",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "StockItem",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "Color",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Color",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "SellingPackage",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "SellingPackage",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "BuyingPackage",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "BuyingPackage",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "Brand",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Brand",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "Size",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Size",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "LeadTimeDays",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LeadTimeDays",
+                  "type": "Int32",
+                  "physicalType": "INT_32"
+                }
+              },
+              {
+                "source": {
+                  "name": "QuantityPerOuter",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "QuantityPerOuter",
+                  "type": "Int32",
+                  "physicalType": "INT_32"
+                }
+              },
+              {
+                "source": {
+                  "name": "IsChillerStock",
+                  "type": "Boolean",
+                  "physicalType": "BOOLEAN"
+                },
+                "sink": {
+                  "name": "IsChillerStock",
+                  "type": "Boolean",
+                  "physicalType": "BOOLEAN"
+                }
+              },
+              {
+                "source": {
+                  "name": "Barcode",
+                  "type": "String",
+                  "physicalType": "STRING"
+                },
+                "sink": {
+                  "name": "Barcode",
+                  "type": "String",
+                  "physicalType": "STRING"
+                }
+              },
+              {
+                "source": {
+                  "name": "TaxRate",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 3,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TaxRate",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL"
+                }
+              },
+              {
+                "source": {
+                  "name": "UnitPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "UnitPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL"
+                }
+              },
+              {
+                "source": {
+                  "name": "RecommendedRetailPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 2,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "RecommendedRetailPrice",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL"
+                }
+              },
+              {
+                "source": {
+                  "name": "TypicalWeightPerUnit",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL",
+                  "scale": 3,
+                  "precision": 18
+                },
+                "sink": {
+                  "name": "TypicalWeightPerUnit",
+                  "type": "Decimal",
+                  "physicalType": "DECIMAL"
+                }
+              },
+              {
+                "source": {
+                  "name": "Photo",
+                  "type": "Byte[]",
+                  "physicalType": "BYTE_ARRAY"
+                },
+                "sink": {
+                  "name": "Photo",
+                  "type": "Byte[]",
+                  "physicalType": "BYTE_ARRAY"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidFrom",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidFrom",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                }
+              },
+              {
+                "source": {
+                  "name": "ValidTo",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                },
+                "sink": {
+                  "name": "ValidTo",
+                  "type": "DateTime",
+                  "physicalType": "INT96"
+                }
+              },
+              {
+                "source": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT32"
+                },
+                "sink": {
+                  "name": "LineageKey",
+                  "type": "Int32",
+                  "physicalType": "INT_32"
+                }
+              }
+            ],
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": false
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "desde_Amuestra_fSale",
+        "dependsOn": []
+      }
+    ]
+  }
+}
